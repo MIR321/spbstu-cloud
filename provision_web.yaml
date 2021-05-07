@@ -1,0 +1,21 @@
+- name: Provision Web Servers   
+  hosts: all
+  tasks:
+
+    - name: Install Docker
+      apt: 
+        update_cache: yes
+        name: docker.io
+      become: yes
+    
+    - name: Install docker compose
+      apt:
+        update_cache: yes
+        name: docker-compose
+      become: yes
+
+    - name: Start Docker
+      shell: |
+        systemctl start docker
+        systemctl enable docker
+      become: yes

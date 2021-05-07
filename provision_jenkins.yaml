@@ -1,0 +1,29 @@
+---
+
+- name: Configure Jenkins Playbook
+  hosts: all
+  tasks:
+    
+    - name: Install pack1
+      apt:
+        update_cache: yes
+        name: libxt-dev
+      become: yes 
+   
+    - name: Install Java Requirements
+      apt:
+        update_cache: yes
+        name: openjdk-11-jdk
+      become: yes 
+    
+    - name: Install Jenkins
+      shell: |
+        wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+        sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+            /etc/apt/sources.list.d/jenkins.list'
+        sudo apt-get update -y
+        sudo apt-get install jenkins -y
+
+    - name: Run Jenkins
+      shell: /etc/init.d/jenkins start
+      become: yes

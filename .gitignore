@@ -1,0 +1,14 @@
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+.terraform.lock.hcl
+*_override.tf.json
+.terraformrc
+terraform.rc
+sshkey
+sshkey.pub
+steps

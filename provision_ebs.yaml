@@ -1,0 +1,11 @@
+- name: Provision EBS
+  hosts: all
+  tasks:
+
+    - name: Mount EBS
+      shell: | 
+        if file -s /dev/xvdh | grep "/dev/xvdh: data"; then mkfs -t ext4 /dev/xvdh; fi
+        mkdir /data
+        echo "/dev/xvdh /data ext4 defaults 0 0" >> /etc/fstab
+        mount /data
+      become: yes
